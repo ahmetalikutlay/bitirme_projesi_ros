@@ -1,0 +1,9 @@
+<launch>
+<rosparam file="$(find bitirme_projesi)/config/ros_controllers.yaml"/>
+  <param name="use_controller_manager" value="true"/>
+  <param name="trajectory_execution/execution_duration_monitoring" value="false"/>
+<param name="trajectory_execution/allowed_execution_duration_scaling" value="2.0"/>
+<param name="trajectory_execution/allowed_goal_duration_margin" value="5.0"/>
+<param name="trajectory_execution/allowed_start_tolerance" value="0.0"/>
+  <param name="moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
+</launch>

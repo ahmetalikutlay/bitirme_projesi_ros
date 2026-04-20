@@ -1,0 +1,29 @@
+<launch>
+
+  <include file="$(find ur5_moveit_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="false"/>
+  </include>
+
+  <rosparam file="$(find bitirme_projesi)/config/ros_controllers.yaml" command="load"/>
+
+  <include ns="move_group" file="$(find bitirme_projesi)/launch/trajectory_execution.launch.xml">
+    <arg name="moveit_manage_controllers" value="true"/>
+    <arg name="moveit_controller_manager" value="ur5"/>
+  </include>
+
+  <include file="$(find ur5_moveit_config)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="fake_execution" value="false"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="pipeline" value="ompl"/>
+  </include>
+
+  <include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="config" value="true"/>
+  </include>
+<param name="/move_group/use_controller_manager" value="true"/>
+<rosparam param="/move_group/controller_list">
+  [{name: eff_joint_traj_controller, action_ns: follow_joint_trajectory, type: FollowJointTrajectory, default: true, joints: [shoulder_pan_joint, shoulder_lift_joint, elbow_joint, wrist_1_joint, wrist_2_joint, wrist_3_joint]}]
+</rosparam>
+</launch>
